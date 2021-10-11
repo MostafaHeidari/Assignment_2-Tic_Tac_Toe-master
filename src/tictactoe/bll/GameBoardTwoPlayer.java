@@ -5,9 +5,15 @@ package tictactoe.bll;
  * It is used for games where there are two human players.
  */
 public class GameBoardTwoPlayer implements IGameModel {
+    int player;
+    int[][] gameBoard = {
+            {-1, -1, -1},
+            {-1, -1, -1},
+            {-1, -1, -1},
+    };
 
     protected GameBoardTwoPlayer() {
-
+        player = 1;
     }
 
     /**
@@ -17,12 +23,19 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        //TODO Implement this method
-        return 0;
+        if (player == 1)
+        {
+            player = 0;
+        }
+        else
+        {
+            player = 1;
+        }
+        return player;
     }
 
     /**
-     * Attempts to let the current player play at the given coordinates. It the
+     * Attempts to let the current player play at the given coordinates. It then
      * attempt is successful the current player has ended his turn and it is the
      * next players turn.
      *
@@ -33,8 +46,12 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        //TODO Implement this method
-        return true;
+        if (gameBoard[col][row] == -1)
+        {
+            gameBoard[col][row] = player;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,8 +94,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getPlayerAt(int col, int row) {
-        //TODO Implement this method
-        return -1;
+        return gameBoard[col][row];
     }
 
 }

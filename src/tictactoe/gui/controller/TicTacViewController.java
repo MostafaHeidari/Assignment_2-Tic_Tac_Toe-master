@@ -92,7 +92,7 @@ public class TicTacViewController implements Initializable {
     }
 
     /**
-     * This method will update the user interface buy asking the GameBoard for who have played the individual field.
+     * This method will update the user interface by asking the GameBoard for who have played the individual field.
      * This is necessary when playing the single player game.
      */
     private void updateGameBoardButtons() {
