@@ -6,14 +6,10 @@ package tictactoe.bll;
  */
 public class GameBoardTwoPlayer implements IGameModel {
     int player;
-    int[][] gameBoard = {
-            {-1, -1, -1},
-            {-1, -1, -1},
-            {-1, -1, -1},
-    };
+    int[][] gameBoard = new int[3][3];
 
     protected GameBoardTwoPlayer() {
-        player = 1;
+        newGame();
     }
 
     /**
@@ -82,7 +78,14 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        //TODO Implement this method
+        getNextPlayer();
+        for (int r = 0; r < gameBoard.length; r++)
+        {
+            for (int c = 0; c < gameBoard[0].length; c++)
+            {
+                gameBoard[r][c] = -1;
+            }
+        }
     }
 
     /**
