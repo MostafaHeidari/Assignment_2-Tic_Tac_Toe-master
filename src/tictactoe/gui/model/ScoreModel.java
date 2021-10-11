@@ -17,7 +17,6 @@ public class ScoreModel {
 
     public void setNextWinner(String winner) {
         //TODO Implement this method.
-        //hello gais
     }
 
 }
