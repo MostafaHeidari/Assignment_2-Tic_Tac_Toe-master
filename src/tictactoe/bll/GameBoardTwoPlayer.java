@@ -74,7 +74,6 @@ public class GameBoardTwoPlayer implements IGameModel {
         {
             if (gameBoard[0][i] == player && gameBoard[1][i] == player && gameBoard[2][i] == player)
             {
-                System.out.println(player + "win");
                 winner = player;
                 return true;
             }
@@ -83,7 +82,6 @@ public class GameBoardTwoPlayer implements IGameModel {
         {
             if (gameBoard[i][0] == player && gameBoard[i][1] == player && gameBoard[i][2] == player)
             {
-                System.out.println(player + "win");
                 winner = player;
                 return true;
             }
@@ -91,13 +89,11 @@ public class GameBoardTwoPlayer implements IGameModel {
 
         if (gameBoard[0][0] == player && gameBoard[1][1] == player && gameBoard[2][2] == player)
         {
-            System.out.println(player + "win");
             winner = player;
             return true;
         }
         else if (gameBoard[0][2] == player && gameBoard[1][1] == player && gameBoard[2][0] == player)
         {
-            System.out.println(player + "win");
             winner = player;
             return true;
         }
