@@ -18,13 +18,15 @@ public class ScoreModel {
     }
 
     public void setNextWinner(String winner) {
-        if (winner == "-1"){
+        int winner2 = Integer.parseInt(winner);
+
+        if (winner2 == -1){
             winners.add("Draw :(");
         }
-        else if (winner == "0"){
+        else if (winner2 == 0){
             winners.add("Player 0");
         }
-        else{
+        else if (winner2 == 1){
             winners.add("Player 1");
         }
     }

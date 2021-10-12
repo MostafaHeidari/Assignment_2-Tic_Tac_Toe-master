@@ -1,5 +1,7 @@
 package tictactoe.bll;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * The GameBoardSinglePlayer class is the optional and advanced implementation for the TicTacToe assignment.
  * It is used for games where there are one human player vs. a computer player.
@@ -7,6 +9,8 @@ package tictactoe.bll;
 public class GameBoardSinglePlayer implements IGameModel {
     final static int MAX_DRAWCOUNT = 9;
 
+    int randCol;
+    int randRow;
     int winner;
     int player;
     int drawCounter;
@@ -47,13 +51,38 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        if (gameBoard[col][row] == -1)
+
+        boolean whileCondition = true;
+        boolean canplay;
+        if (gameBoard[col][row] == -1 && !isGameOver())
         {
-            gameBoard[col][row] = player;
+            gameBoard[col][row] = 0;
             drawCounter++;
-            return true;
+            canplay = true;
+        }else canplay = false;
+
+        while (whileCondition && canplay && !isGameOver()){
+            getNextPlayer();
+            randCoords();
+            if (gameBoard[randCol][randRow] == -1){
+
+                gameBoard[randCol][randRow] = 1;
+                drawCounter++;
+                whileCondition = false;
+            }
         }
-        return false;
+        return canplay;
+    }
+
+    /**
+     * creates a random number for the AI to move with
+     */
+    public void randCoords(){
+        randCol = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        randRow = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+
+        System.out.println("Col:" + randCol);
+        System.out.println("Row:" + randRow);
     }
 
     /**
@@ -66,29 +95,45 @@ public class GameBoardSinglePlayer implements IGameModel {
     public boolean isGameOver() {
         for (int i = 0; i < gameBoard.length; i++)
         {
-            if (gameBoard[0][i] == player && gameBoard[1][i] == player && gameBoard[2][i] == player)
+            if (gameBoard[0][i] == 1 && gameBoard[1][i] == 1 && gameBoard[2][i] == 1)
             {
-                winner = player;
+                winner = 1;
+                return true;
+            }
+            else if (gameBoard[0][i] == 0 && gameBoard[1][i] == 0 && gameBoard[2][i] == 0){
+                winner = 0;
                 return true;
             }
         }
         for (int i = 0; i < gameBoard[0].length; i++)
         {
-            if (gameBoard[i][0] == player && gameBoard[i][1] == player && gameBoard[i][2] == player)
+            if (gameBoard[i][0] == 1 && gameBoard[i][1] == 1 && gameBoard[i][2] == 1)
             {
-                winner = player;
+                winner = 1;
+                return true;
+            }
+            else if(gameBoard[i][0] == 0 && gameBoard[i][1] == 0 && gameBoard[i][2] == 0){
+                winner = 0;
                 return true;
             }
         }
 
-        if (gameBoard[0][0] == player && gameBoard[1][1] == player && gameBoard[2][2] == player)
+        if (gameBoard[0][0] == 1 && gameBoard[1][1] == 1 && gameBoard[2][2] == 1)
         {
-            winner = player;
+            winner = 1;
             return true;
         }
-        else if (gameBoard[0][2] == player && gameBoard[1][1] == player && gameBoard[2][0] == player)
+        else if (gameBoard[0][0] == 0 && gameBoard[1][1] == 0 && gameBoard[2][2] == 0){
+            winner = 0;
+            return true;
+        }
+        else if (gameBoard[0][2] == 1 && gameBoard[1][1] == 1 && gameBoard[2][0] == 1)
         {
-            winner = player;
+            winner = 1;
+            return true;
+        }
+        else if (gameBoard[0][2] == 0 && gameBoard[1][1] == 0 && gameBoard[2][0] == 0){
+            winner = 0;
             return true;
         }
 
