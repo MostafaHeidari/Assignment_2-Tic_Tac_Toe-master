@@ -16,7 +16,6 @@ public class GameBoardTwoPlayer implements IGameModel {
     int drawCounter;
     int[][] gameBoard = new int[3][3];
 
-    ScoreModel scoreModel = new ScoreModel();
     protected GameBoardTwoPlayer() {
 
         newGame();
@@ -69,7 +68,6 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //TODO Implement this method
         for (int i = 0; i < gameBoard.length; i++)
         {
             if (gameBoard[0][i] == player && gameBoard[1][i] == player && gameBoard[2][i] == player)

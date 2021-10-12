@@ -5,9 +5,16 @@ package tictactoe.bll;
  * It is used for games where there are one human player vs. a computer player.
  */
 public class GameBoardSinglePlayer implements IGameModel {
+    final static int MAX_DRAWCOUNT = 9;
+
+    int winner;
+    int player;
+    int drawCounter;
+    int[][] gameBoard = new int[3][3];
 
     protected GameBoardSinglePlayer() {
 
+        newGame();
     }
 
     /**
@@ -17,8 +24,15 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        //TODO Implement this method
-        return 0;
+        if (player == 1)
+        {
+            player = 0;
+        }
+        else
+        {
+            player = 1;
+        }
+        return player;
     }
 
     /**
@@ -33,7 +47,12 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        //TODO Implement this method
+        if (gameBoard[col][row] == -1)
+        {
+            gameBoard[col][row] = player;
+            drawCounter++;
+            return true;
+        }
         return false;
     }
 
@@ -45,7 +64,38 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //TODO Implement this method
+        for (int i = 0; i < gameBoard.length; i++)
+        {
+            if (gameBoard[0][i] == player && gameBoard[1][i] == player && gameBoard[2][i] == player)
+            {
+                winner = player;
+                return true;
+            }
+        }
+        for (int i = 0; i < gameBoard[0].length; i++)
+        {
+            if (gameBoard[i][0] == player && gameBoard[i][1] == player && gameBoard[i][2] == player)
+            {
+                winner = player;
+                return true;
+            }
+        }
+
+        if (gameBoard[0][0] == player && gameBoard[1][1] == player && gameBoard[2][2] == player)
+        {
+            winner = player;
+            return true;
+        }
+        else if (gameBoard[0][2] == player && gameBoard[1][1] == player && gameBoard[2][0] == player)
+        {
+            winner = player;
+            return true;
+        }
+
+        if (drawCounter == MAX_DRAWCOUNT){
+            winner = -1;
+            return true;
+        }
         return false;
     }
 
@@ -56,8 +106,7 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        //TODO Implement this method
-        return 0;
+        return winner;
     }
 
     /**
@@ -65,7 +114,16 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        //TODO Implement this method
+        winner = -1;
+        drawCounter = 0;
+        getNextPlayer();
+        for (int r = 0; r < gameBoard.length; r++)
+        {
+            for (int c = 0; c < gameBoard[0].length; c++)
+            {
+                gameBoard[r][c] = -1;
+            }
+        }
     }
 
     /**
@@ -77,7 +135,6 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public int getPlayerAt(int col, int row) {
-        //TODO Implement this method
-        return -1;
+        return gameBoard[col][row];
     }
 }
