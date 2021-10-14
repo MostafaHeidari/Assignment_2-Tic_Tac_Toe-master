@@ -53,15 +53,15 @@ public class GameBoardSinglePlayer implements IGameModel {
     public boolean play(int col, int row) {
 
         boolean whileCondition = true;
-        boolean canplay;
+        boolean canPlay;
         if (gameBoard[col][row] == -1 && !isGameOver())
         {
             gameBoard[col][row] = 0;
             drawCounter++;
-            canplay = true;
-        }else canplay = false;
+            canPlay = true;
+        }else canPlay = false;
 
-        while (whileCondition && canplay && !isGameOver()){
+        while (whileCondition && canPlay && !isGameOver()){
             getNextPlayer();
             randCoords();
             if (gameBoard[randCol][randRow] == -1){
@@ -71,7 +71,7 @@ public class GameBoardSinglePlayer implements IGameModel {
                 whileCondition = false;
             }
         }
-        return canplay;
+        return canPlay;
     }
 
     /**
@@ -80,9 +80,6 @@ public class GameBoardSinglePlayer implements IGameModel {
     public void randCoords(){
         randCol = ThreadLocalRandom.current().nextInt(0, 2 + 1);
         randRow = ThreadLocalRandom.current().nextInt(0, 2 + 1);
-
-        System.out.println("Col:" + randCol);
-        System.out.println("Row:" + randRow);
     }
 
     /**
@@ -104,10 +101,7 @@ public class GameBoardSinglePlayer implements IGameModel {
                 winner = 0;
                 return true;
             }
-        }
-        for (int i = 0; i < gameBoard[0].length; i++)
-        {
-            if (gameBoard[i][0] == 1 && gameBoard[i][1] == 1 && gameBoard[i][2] == 1)
+            else if (gameBoard[i][0] == 1 && gameBoard[i][1] == 1 && gameBoard[i][2] == 1)
             {
                 winner = 1;
                 return true;

@@ -75,10 +75,7 @@ public class GameBoardTwoPlayer implements IGameModel {
                 winner = player;
                 return true;
             }
-        }
-        for (int i = 0; i < gameBoard[0].length; i++)
-        {
-            if (gameBoard[i][0] == player && gameBoard[i][1] == player && gameBoard[i][2] == player)
+            else if (gameBoard[i][0] == player && gameBoard[i][1] == player && gameBoard[i][2] == player)
             {
                 winner = player;
                 return true;
@@ -110,6 +107,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
+
         return winner;
     }
 
